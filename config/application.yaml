@@ -1,0 +1,62 @@
+# Application Configuration
+application:
+  name: NestJS CRUD API
+  version: 1.0.0
+  environment: production
+  port: ${PORT:6666}
+  metricsPort: ${METRICS_PORT:9090}
+
+# Database Configuration
+database:
+  host: ${DB_HOST:localhost}
+  port: ${DB_PORT:5432}
+  username: ${DB_USER:postgres}
+  password: ${POSTGRES_DOCKER_PASSWORD}
+  database: nestjs_crud
+  pool:
+    min: ${DB_POOL_MIN:2}
+    max: ${DB_POOL_MAX:10}
+    idleTimeoutMillis: 30000
+    connectionTimeoutMillis: 2000
+
+# Logging Configuration
+logging:
+  level: ${LOG_LEVEL:info}
+  format: ${LOG_FORMAT:json}
+  file:
+    enabled: ${LOG_FILE_ENABLED:true}
+    path: ${LOG_PATH:logs}
+    maxSize: 5242880 # 5MB
+    maxFiles: 5
+
+# Scheduler Configuration
+scheduler:
+  enabled: ${SCHEDULER_ENABLED:true}
+  dataSeeding:
+    enabled: ${SCHEDULER_DATA_SEEDING_ENABLED:true}
+    interval: ${SCHEDULER_DATA_SEEDING_INTERVAL:30} # seconds
+    userCount: ${SCHEDULER_USER_COUNT:5}
+    maxCarsPerUser: ${SCHEDULER_MAX_CARS_PER_USER:50}
+
+# CORS Configuration
+cors:
+  enabled: ${CORS_ENABLED:true}
+  origins: ${CORS_ORIGINS:*}
+  credentials: ${CORS_CREDENTIALS:true}
+
+# Rate Limiting
+rateLimit:
+  enabled: ${RATE_LIMIT_ENABLED:false}
+  ttl: ${RATE_LIMIT_TTL:60} # seconds
+  limit: ${RATE_LIMIT_MAX:100} # requests
+
+# Prometheus Metrics
+metrics:
+  enabled: ${METRICS_ENABLED:true}
+  path: ${METRICS_PATH:/metrics}
+
+# Feature Flags
+features:
+  bulkOperations: ${FEATURE_BULK_OPERATIONS:true}
+  carTransfer: ${FEATURE_CAR_TRANSFER:true}
+  userRegistrationWithCars: ${FEATURE_USER_REGISTRATION_WITH_CARS:true}

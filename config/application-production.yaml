@@ -1,0 +1,28 @@
+# Production specific configuration
+application:
+  environment: production
+
+logging:
+  level: info
+  format: json
+
+database:
+  host: ${DB_HOST}
+  port: ${DB_PORT}
+  pool:
+    min: 5
+    max: 20
+
+scheduler:
+  enabled: ${SCHEDULER_ENABLED:false}
+  dataSeeding:
+    enabled: false
+
+rateLimit:
+  enabled: true
+  ttl: 60
+  limit: 100
+
+cors:
+  origins: ${CORS_ORIGINS:https://yourdomain.com}
+  credentials: true

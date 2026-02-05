@@ -1,0 +1,17 @@
+# Test specific configuration
+application:
+  environment: test
+  port: 3001
+
+logging:
+  level: error
+  file:
+    enabled: false
+
+database:
+  host: localhost
+  port: 5433
+  database: nestjs_crud_test
+
+scheduler:
+  enabled: false

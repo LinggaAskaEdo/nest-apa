@@ -1,0 +1,17 @@
+# Development specific configuration
+application:
+  environment: development
+
+logging:
+  level: debug
+  format: pretty
+
+database:
+  host: localhost
+  port: 5432
+
+scheduler:
+  enabled: true
+  dataSeeding:
+    enabled: true
+    interval: 30
