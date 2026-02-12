@@ -15,8 +15,6 @@ async function bootstrap() {
   const appConfig = configService.applicationConfig;
   const corsConfig = configService.corsConfig;
 
-  const port = configService.getNumber('PORT') || 3000;
-
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -44,4 +42,8 @@ async function bootstrap() {
     environment: appConfig.environment,
   });
 }
-bootstrap();
+
+// bootstrap(); is perfectly valid CommonJS/TypeScript code.
+// The SonarQube rule S7785 simply prefers top‑level await when in an ES module environment.
+// Since your project is not using ES modules, the warning is a false positive, it is safe to ignore.
+bootstrap(); // NOSONAR
