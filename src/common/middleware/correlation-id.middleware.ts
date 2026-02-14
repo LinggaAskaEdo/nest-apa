@@ -15,9 +15,7 @@ export class CorrelationIdMiddleware implements NestMiddleware {
     }
 
     let namespace = getNamespace(CORRELATION_NAMESPACE);
-    if (!namespace) {
-      namespace = createNamespace(CORRELATION_NAMESPACE);
-    }
+    namespace ??= createNamespace(CORRELATION_NAMESPACE);
 
     namespace.run(() => {
       const correlationId =

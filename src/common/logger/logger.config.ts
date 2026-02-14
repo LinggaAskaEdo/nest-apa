@@ -20,7 +20,18 @@ export function createWinstonConfig(configService: ConfigService): WinstonModule
     winston.format.errors({ stack: true }),
     winston.format.colorize(),
     winston.format.printf(({ timestamp, level, message, context, trace }) => {
-      return `${timestamp} [${context}] ${level}: ${message}${trace ? `\n${trace}` : ''}`;
+      // Build the base log message without nested template literals
+      let logMessage = `${timestamp} [${context}] ${level}: ${message}`;
+
+      // Safely append trace information if present
+      if (trace) {
+        // Convert trace to a meaningful string: use JSON.stringify for objects,
+        // or keep it as is if it's already a string.
+        const traceString = typeof trace === 'string' ? trace : JSON.stringify(trace);
+        logMessage += `\n${traceString}`;
+      }
+
+      return logMessage;
     }),
   );
 

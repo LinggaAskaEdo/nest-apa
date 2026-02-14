@@ -3,7 +3,7 @@ import { loadYamlConfig, YamlConfig } from './yaml-config.loader';
 
 @Injectable()
 export class ConfigService {
-  private config: YamlConfig;
+  private readonly config: YamlConfig;
 
   constructor() {
     this.config = loadYamlConfig();
@@ -22,8 +22,7 @@ export class ConfigService {
       }
     }
 
-    // return value !== undefined ? value : defaultValue;
-    return (value !== undefined ? value : defaultValue) as T;
+    return (value === undefined ? defaultValue : value) as T;
   }
 
   // Get string value
@@ -51,7 +50,7 @@ export class ConfigService {
     }
 
     if (value === undefined) {
-      return defaultValue !== undefined ? defaultValue : false;
+      return defaultValue ?? false;
     }
 
     return Boolean(value);

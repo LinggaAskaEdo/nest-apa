@@ -7,8 +7,8 @@ import { PrometheusService } from '../performance/prometheus.service';
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
   constructor(
-    private logger: CustomLoggerService,
-    private prometheusService: PrometheusService,
+    private readonly logger: CustomLoggerService,
+    private readonly prometheusService: PrometheusService,
   ) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {

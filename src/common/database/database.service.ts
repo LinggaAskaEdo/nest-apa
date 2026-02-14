@@ -9,9 +9,9 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   private pool!: Pool;
 
   constructor(
-    private configService: ConfigService,
-    private logger: CustomLoggerService,
-    private prometheusService: PrometheusService,
+    private readonly configService: ConfigService,
+    private readonly logger: CustomLoggerService,
+    private readonly prometheusService: PrometheusService,
   ) {}
 
   async onModuleInit() {

@@ -12,11 +12,11 @@ interface PerformanceTracker {
 
 @Injectable()
 export class PerformanceService {
-  private trackers: Map<string, PerformanceTracker> = new Map();
+  private readonly trackers: Map<string, PerformanceTracker> = new Map();
 
   constructor(
-    private logger: CustomLoggerService,
-    private prometheusService: PrometheusService,
+    private readonly logger: CustomLoggerService,
+    private readonly prometheusService: PrometheusService,
   ) {}
 
   startTracking(operation: string, metadata?: any): string {

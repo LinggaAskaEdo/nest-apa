@@ -11,9 +11,9 @@ import { UsersRepository } from './users.repository';
 @Injectable()
 export class UsersService {
   constructor(
-    private usersRepository: UsersRepository,
-    private logger: CustomLoggerService,
-    private performanceService: PerformanceService,
+    private readonly usersRepository: UsersRepository,
+    private readonly logger: CustomLoggerService,
+    private readonly performanceService: PerformanceService,
   ) {}
 
   async findAll(queryDto: QueryUserDto) {

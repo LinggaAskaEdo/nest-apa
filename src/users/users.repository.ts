@@ -10,7 +10,7 @@ import { UsersQueries } from './sql/users.queries';
 
 @Injectable()
 export class UsersRepository {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async findAll(queryDto: QueryUserDto): Promise<{ users: User[]; total: number }> {
     const { page = 1, limit = 10, sortBy = 'id', sortOrder = 'ASC', ...filters } = queryDto;
@@ -72,7 +72,7 @@ export class UsersRepository {
 
     return {
       users: usersResult.rows,
-      total: parseInt(countResult.rows[0].total, 10),
+      total: Number.parseInt(countResult.rows[0].total, 10),
     };
   }
 
@@ -198,11 +198,11 @@ export class UsersRepository {
         ]);
 
         const userRow = result.rows[0];
-        if (!userRow || !userRow.id) {
+        if (!userRow?.id) {
           throw new Error(`Failed to create user with data: ${JSON.stringify(users)}`);
         }
 
-        createdUsers.push(userRow as User);
+        createdUsers.push(userRow);
       }
 
       return createdUsers;
@@ -230,7 +230,7 @@ export class UsersRepository {
       ]);
 
       const userRow = userResult.rows[0];
-      if (!userRow || !userRow.id || !userRow.email || !userRow.name) {
+      if (!userRow?.id || !userRow.email || !userRow.name) {
         throw new Error('Failed to create user - invalid data returned');
       }
 
@@ -265,11 +265,11 @@ export class UsersRepository {
         );
 
         const carRow = carResult.rows[0];
-        if (!carRow || !carRow.id) {
+        if (!carRow?.id) {
           throw new Error(`Failed to create car with data: ${JSON.stringify(carData)}`);
         }
 
-        cars.push(carRow as Car);
+        cars.push(carRow);
       }
 
       return {

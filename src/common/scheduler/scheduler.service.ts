@@ -11,9 +11,9 @@ export class SchedulerService implements OnApplicationBootstrap {
   private readonly dataSeedingInterval: number;
 
   constructor(
-    private seederService: SeederService,
-    private logger: CustomLoggerService,
-    private configService: ConfigService,
+    private readonly seederService: SeederService,
+    private readonly logger: CustomLoggerService,
+    private readonly configService: ConfigService,
   ) {
     const schedulerConfig = this.configService.schedulerConfig;
     this.schedulerEnabled = schedulerConfig.enabled;

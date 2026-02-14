@@ -15,10 +15,10 @@ export class SeederService {
   private readonly maxCarsPerUser: number;
 
   constructor(
-    private databaseService: DatabaseService,
-    private logger: CustomLoggerService,
-    private performanceService: PerformanceService,
-    private configService: ConfigService,
+    private readonly databaseService: DatabaseService,
+    private readonly logger: CustomLoggerService,
+    private readonly performanceService: PerformanceService,
+    private readonly configService: ConfigService,
   ) {
     const schedulerConfig = this.configService.schedulerConfig;
     this.userCount = schedulerConfig.dataSeeding.userCount;

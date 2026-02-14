@@ -9,7 +9,7 @@ import { CarsQueries } from './sql/cars.queries';
 
 @Injectable()
 export class CarsRepository {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async findAll(queryDto: QueryCarDto): Promise<{ cars: CarWithUser[]; total: number }> {
     const { page = 1, limit = 10, sortBy = 'id', sortOrder = 'ASC', ...filters } = queryDto;
@@ -83,7 +83,7 @@ export class CarsRepository {
 
     return {
       cars: carsResult.rows,
-      total: parseInt(countResult.rows[0]?.total ?? '0', 10),
+      total: Number.parseInt(countResult.rows[0]?.total ?? '0', 10),
     };
   }
 
@@ -281,7 +281,7 @@ export class CarsRepository {
   async countByUser(userId: string): Promise<number> {
     const result = await this.databaseService.query(CarsQueries.countByUser, [userId]);
 
-    return parseInt(result.rows[0]?.count ?? '0', 10);
+    return Number.parseInt(result.rows[0]?.count ?? '0', 10);
   }
 
   async bulkTransferOwnership(

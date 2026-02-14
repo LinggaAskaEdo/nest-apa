@@ -13,10 +13,10 @@ import { Car, CarWithUser } from './entities/car.entity';
 @Injectable()
 export class CarsService {
   constructor(
-    private carsRepository: CarsRepository,
-    private usersService: UsersService,
-    private logger: CustomLoggerService,
-    private performanceService: PerformanceService,
+    private readonly carsRepository: CarsRepository,
+    private readonly usersService: UsersService,
+    private readonly logger: CustomLoggerService,
+    private readonly performanceService: PerformanceService,
   ) {}
 
   async findAll(queryDto: QueryCarDto) {

@@ -3,23 +3,23 @@ import { Counter, Gauge, Histogram, Registry } from 'prom-client';
 
 @Injectable()
 export class PrometheusService {
-  private registry: Registry;
+  private readonly registry: Registry;
 
   // HTTP Metrics
-  private httpRequestsTotal: Counter;
-  private httpRequestDuration: Histogram;
-  private httpRequestsInProgress: Gauge;
+  private readonly httpRequestsTotal: Counter;
+  private readonly httpRequestDuration: Histogram;
+  private readonly httpRequestsInProgress: Gauge;
 
   // Database Metrics
-  private dbQueryDuration: Histogram;
-  private dbQueriesTotal: Counter;
+  private readonly dbQueryDuration: Histogram;
+  private readonly dbQueriesTotal: Counter;
 
   // Business Operation Metrics
-  private operationDuration: Histogram;
-  private operationsTotal: Counter;
+  private readonly operationDuration: Histogram;
+  private readonly operationsTotal: Counter;
 
   // Active Connections
-  private activeConnections: Gauge;
+  private readonly activeConnections: Gauge;
 
   constructor() {
     this.registry = new Registry();

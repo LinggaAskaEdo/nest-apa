@@ -1,6 +1,6 @@
-import * as fs from 'fs';
 import * as yaml from 'js-yaml';
-import * as path from 'path';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 export interface YamlConfig {
   [key: string]: any;
@@ -41,10 +41,10 @@ function deepMerge(target: any, source: any): any {
   if (isObject(target) && isObject(source)) {
     Object.keys(source).forEach((key) => {
       if (isObject(source[key])) {
-        if (!(key in target)) {
-          Object.assign(output, { [key]: source[key] });
-        } else {
+        if (key in target) {
           output[key] = deepMerge(target[key], source[key]);
+        } else {
+          Object.assign(output, { [key]: source[key] });
         }
       } else {
         Object.assign(output, { [key]: source[key] });
@@ -100,14 +100,14 @@ function replaceEnvVariable(value: string): any {
     const defaultValue = match[2] || '';
     const envValue = process.env[envVar];
 
-    const replacementValue = envValue !== undefined ? envValue : defaultValue;
+    const replacementValue = envValue ?? defaultValue;
     result = result.replace(match[0], replacementValue);
   }
 
   // Try to convert to appropriate type
   if (result === 'true') return true;
   if (result === 'false') return false;
-  if (!isNaN(Number(result)) && result !== '') return Number(result);
+  if (!Number.isNaN(Number(result)) && result !== '') return Number(result);
 
   return result;
 }
